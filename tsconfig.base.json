@@ -15,9 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@polybank/api-client": [
-        "libs/shared/api-client/src/index.ts"
-      ]
+      "@polybank/api-client": ["libs/shared/api-client/src/index.ts"],
+      "@polybank/auth": ["libs/shared/auth/src/index.ts"],
+      "@polybank/domains/users": ["libs/domains/users/src/index.ts"],
+      "@polybank/interfaces": ["libs/shared/interfaces/src/index.ts"],
+      "@polybank/pages/layout": ["libs/pages/layout/src/index.ts"],
+      "@polybank/pages/login": ["libs/pages/login/src/index.ts"],
+      "@polybank/routes": ["libs/shared/routes/src/index.ts"],
+      "@polybank/state/store": ["libs/state/store/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

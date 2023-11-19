@@ -1,14 +1,42 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
+import { Navigate, Route, Routes } from "react-router";
+import { LOGIN_URL } from '@polybank/routes'
+import { PageLogin } from '@polybank/pages/login'
+import { Layout } from '@polybank/pages/layout'
+import { ROUTER } from "./main.router"
 
-import NxWelcome from './nx-welcome';
-
-export function App() {
+export default function App() {
   return (
     <div>
-      <NxWelcome title="client" />
-    </div>
-  );
-}
+        <Routes>
 
-export default App;
+          <Route path={`${LOGIN_URL}/*`} element={<PageLogin />} />
+          { ROUTER.map((route) => 
+            route.layout ? (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={
+                  !route.protected ? (
+                    <>
+                      <Layout>{ route.component }</Layout>
+                    </>
+                  ) : (
+                    <>
+                      <Layout>{ route.component }</Layout>
+                    </>
+                  )
+                }
+              />
+            ) : (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={!route.protected ? route.component : <>{ route.component }</>}
+              />
+            )
+          )}
+          <Route path="*" element={<Navigate replace to={LOGIN_URL} />} />
+        </Routes>
+    </div>
+  )
+}
