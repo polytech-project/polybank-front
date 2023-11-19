@@ -1,0 +1,14 @@
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
+@import 'base/variable';
+@import 'base/icons';
+
+@import 'object/animation';
+
+@import 'components/input.scss';
+@import 'components/modal.scss';
+@import 'components/skeleton.scss';
+@import 'components/button.scss';
+@import 'components/menu.scss';
