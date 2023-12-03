@@ -1,21 +1,32 @@
 import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit"
 import { UserEntity, UserState } from '@polybank/interfaces'
 import { apiClient } from '@polybank/api-client'
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { type RootState } from '@polybank/state/store'
 
 export const USER_KEY = 'user'
 
 export const userAdapter = createEntityAdapter<UserEntity>()
 
-export const fetchUser = createAsyncThunk('user/fetch', async (): Promise<UserState> => {
-  const response = await apiClient.get<UserEntity>('/authentication/me').build()
+export const fetchUser = createAsyncThunk('user/fetch', async (): Promise<UserState | undefined> => {
+  try {
+    const response = await apiClient.get<UserEntity>('/authentication/me').build()
 
-  return {
-    user: response.data,
-    isLoading: false,
-    isAuthenticated: true
+    return {
+      user: response.data,
+      isLoading: false,
+      isAuthenticated: true
+    }
+  } catch (err: any) {
+    console.log(err);
+    console.log(window.location.pathname);
+
+
+    if (err.response.status === 401 && !window.location.pathname.includes('/login')) {
+      window.location.href = '/login'
+    }
   }
-}) 
+})
 
 export const initialUserState: UserState = {
   isAuthenticated: false,
@@ -29,9 +40,9 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.fulfilled, (state, action) => {
-        state.user = action.payload.user
+        state.user = action.payload!.user
         state.isLoading = false
-        state.isAuthenticated = !!action.payload.user?.id
+        state.isAuthenticated = !!action.payload!.user?.id
       })
   }
 })
