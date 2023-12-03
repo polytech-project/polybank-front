@@ -1,7 +1,8 @@
-import { StrictMode } from 'react'
+import { Fragment, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { setupStore } from '@polybank/state/store'
+import { Provider as TooltipProvider } from '@radix-ui/react-tooltip'
 
 import App from './app/app'
 
@@ -16,15 +17,19 @@ const queryClient = new QueryClient()
 const store = setupStore()
 
 root.render(
-  <StrictMode>
+  <div>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider store={store}>
         <BrowserRouter>
-          <App />
+          <TooltipProvider>
+            <Fragment>
+              <App />
+            </Fragment>
+          </TooltipProvider>
         </BrowserRouter>
       </Provider>
     </QueryClientProvider>
-  </StrictMode>
+  </div>
 )
 

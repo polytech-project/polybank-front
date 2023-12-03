@@ -11,7 +11,18 @@ import { BrowserRouter } from 'react-router-dom'
 const container = document.getElementById('root') || document.createElement('div')
 const root = createRoot(container)
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      onSuccess(data) {
+        console.log('onSuccess', data)
+      },
+      onError(err) {
+        console.log('onError', err)
+      },
+    }
+  }
+})
 
 const store = setupStore()
 
