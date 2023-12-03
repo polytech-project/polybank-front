@@ -15,13 +15,23 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@polybank/enums": ["libs/shared/enums/src/index.ts"],
+      "@polybank/domains/projects": [
+        "libs/domains/projects/src/index.ts"
+      ],
+      "@polybank/pages/client/projects": [
+        "libs/pages/client/projects/src/index.ts"
+      ],
+      "@polybank/pages/panel/projects": [
+        "libs/pages/panel/projects/src/index.ts"
+      ],
       "@polybank/api-client": ["libs/shared/api-client/src/index.ts"],
       "@polybank/auth": ["libs/shared/auth/src/index.ts"],
       "@polybank/domains/users": ["libs/domains/users/src/index.ts"],
+      "@polybank/enums": ["libs/shared/enums/src/index.ts"],
       "@polybank/interfaces": ["libs/shared/interfaces/src/index.ts"],
       "@polybank/pages/layout": ["libs/pages/layout/src/index.ts"],
       "@polybank/pages/login": ["libs/pages/login/src/index.ts"],
+      "@polybank/pages/panel/home": ["libs/pages/panel/home/src/index.ts"],
       "@polybank/routes": ["libs/shared/routes/src/index.ts"],
       "@polybank/state/store": ["libs/state/store/src/index.ts"],
       "@polybank/ui": ["libs/shared/ui/src/index.ts"],
