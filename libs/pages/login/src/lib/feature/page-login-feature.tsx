@@ -4,7 +4,7 @@ import Login from "../ui/login"
 
 export function PageLoginFeature () {
 
-  useRedirectIfLogged()
+  useRedirectIfLogged('/home')
   
   return (
     <LayoutLogin>

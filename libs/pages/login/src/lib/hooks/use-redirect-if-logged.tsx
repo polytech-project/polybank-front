@@ -1,20 +1,28 @@
 import {useNavigate} from "react-router"
 import { useDispatch, useSelector } from 'react-redux'
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { AppDispatch } from '@polybank/state/store'
-import { getUserState } from "@polybank/domains/users"
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { fetchUser, getUserState } from "@polybank/domains/users"
 import { useEffect } from "react"
 
-export function useRedirectIfLogged () {
+export function useRedirectIfLogged (path: string | undefined = '/home') {
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
 
   const user = useSelector(getUserState)
 
   useEffect(() => {
+    dispatch(fetchUser())
+    .unwrap()
+
+  }, [dispatch])
+
+  useEffect(() => {
     console.log('user', user);
-    
+
     if (user.isAuthenticated) {
-      navigate('/')
+      navigate(path)
     }
   }, [user])
 }
