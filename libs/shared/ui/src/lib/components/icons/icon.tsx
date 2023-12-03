@@ -30,7 +30,7 @@ import PostgresqlIcon from './icons/postgresql'
 import RedisIcon from './icons/redis'
 import IconFa from './icon-fa/icon-fa'
 import DragIcon from './icons/drag'
-import './icon.scss'
+
 export interface IconProps {
   name: IconEnum | IconAwesomeEnum | string
   width?: string
@@ -45,7 +45,7 @@ export function Icon (props: IconProps) {
 
   formattedProps.width = formattedProps.width || '1.5rem'
   formattedProps.viewBox = formattedProps.viewBox || '0 0 24 24'
-  formattedProps.className = 'shrink-0' + (formattedProps.className || '')
+  formattedProps.className = 'shrink-0 ' + (formattedProps.className || '')
 
   switch (props.name) {
     /* ICON HEROICONS */

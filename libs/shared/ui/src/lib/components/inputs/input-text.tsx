@@ -1,6 +1,6 @@
 import { ChangeEventHandler, ReactNode, RefObject, useEffect, useRef, useState } from "react"
 import { Icon } from "../icons/icon"
-import { IconAwesomeEnum } from "@console/enums"
+import { IconAwesomeEnum } from "@polybank/enums"
 
 export interface InputTextProps {
 	name: string
@@ -45,7 +45,7 @@ export function InputText ({
 		if (!disabled && input) input.showPicker()
 	}
 
-	const isInputDate = type === 'time' || type === 'date' || type == 'datetime'
+	const isInputDate = type === 'time' || type === 'date' || type === 'datetime'
 
 	return (
 		<div

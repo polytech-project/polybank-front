@@ -47,7 +47,7 @@ export function InputSelectSmall ({
 
 	return (
 		<div className={classNames(
-			'relative flex gap-4 items-center', className
+			'relative flex gap-1 flex-col', className
 		)}>
 			{ label && <label className="text-sm shrink-0">{ label }</label>}
 			<select
@@ -66,7 +66,7 @@ export function InputSelectSmall ({
 
 			<Icon
 				name="icon-solid-angle-down"
-				className="absolute top-3 right-4 text-sm text-neutral-400 leading-3 translate-y-0.5 pointer-events-none"
+				className="absolute top-8 right-4 text-sm text-neutral-400 leading-3 translate-y-0.5 pointer-events-none"
 			/>
 
 		</div>

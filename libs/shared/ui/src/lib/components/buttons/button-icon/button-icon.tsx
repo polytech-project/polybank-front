@@ -47,9 +47,13 @@ export function ButtonIcon ({
 	type = 'button',
 }: ButtonIconProps) {
 
+	
   const defineClass = `btn btn-icon group ${size ? `btn--${size}` : ''} ${style ? `btn-icon--${style}` : ''} ${
     disabled || loading ? 'btn--disabled' : ''
   } ${active ? 'btn--active' : ''} ${className}`
+
+	console.log(link, defineClass, style);
+	
 
   return (
 		<>

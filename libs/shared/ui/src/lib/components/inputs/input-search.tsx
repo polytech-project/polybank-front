@@ -2,6 +2,7 @@ import { classNames } from '@polybank/utils'
 import { type ReactElement, useRef, useState } from 'react'
 import { Icon } from '../icons/icon'
 import { IconAwesomeEnum } from '@polybank/enums'
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 export interface InputSearchProps {
   placeholder?: string
@@ -44,11 +45,9 @@ export function InputSearch (props: InputSearchProps) {
 
 	return (
 		<>
-			<div className={classNames('relative w-full bg-red-500', className)}>
-				<Icon
-          name="icon-solid-magnifying-glass"
-          className="absolute left-3 top-1/2 -translate-y-1/2 block text-xs text-neutral-350 leading-none"
-        />
+			<div className={classNames('relative w-full ', className)}>
+
+				<MagnifyingGlassIcon className='w-4 absolute left-2 top-1/2 -translate-y-1/2' />
 
 				<input 
 					data-testid="input-search"
@@ -67,7 +66,7 @@ export function InputSearch (props: InputSearchProps) {
 
 				{ toggleDelete &&
 					<button className="absolute right-3 top-1/2 -translate-y-1/2" onClick={deleteValue}>
-						<Icon className="text-neutral-350 text-sm" name={IconAwesomeEnum.CIRCLE_XMARK} />
+						<XMarkIcon className="text-neutral-350 w-5" />
 					</button>
 				}
 			</div>
