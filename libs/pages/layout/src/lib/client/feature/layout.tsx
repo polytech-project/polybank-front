@@ -11,6 +11,8 @@ export function Layout({ children }: PropsWithChildren) {
     dispatch(fetchUser())
     .unwrap()
     .then((data) => {
+      console.log("dazda");
+      
       console.log(data);
     })
   }, [dispatch])
