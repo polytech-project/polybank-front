@@ -1,6 +1,7 @@
 import { ChangeEventHandler, ReactNode, RefObject, useEffect, useRef, useState } from "react"
 import { Icon } from "../icons/icon"
 import { IconAwesomeEnum } from "@polybank/enums"
+import {current} from "@reduxjs/toolkit";
 
 export interface InputTextProps {
 	name: string
@@ -64,7 +65,7 @@ export function InputText ({
 							{ label }
 						</label>
 
-						<input 
+						<input
 							date-testid={dataTestId || 'input-text'}
 							ref={customRef}
 							name={name}

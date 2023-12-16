@@ -13,6 +13,7 @@ export interface InputSelectSmallProps {
 	onChange?: (item: string | undefined) => void
 	defaultValue?: string
 	inputClassName?: string
+  disabled?: boolean
 }
 
 export function InputSelectSmall ({
@@ -24,7 +25,8 @@ export function InputSelectSmall ({
 	dataTestId,
 	onChange,
 	defaultValue,
-	inputClassName = ''
+	inputClassName = '',
+  disabled
 }: InputSelectSmallProps) {
 	const [value, setValue] = useState(defaultValue)
 

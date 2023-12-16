@@ -31,14 +31,12 @@ class GetRequest<T> extends Request {
 }
 
 class PostRequest extends Request {
-  private fields: FormData = new FormData()
+  private fields = {}
 
   constructor(private url: string) { super() }
 
-  public payload (fields: Field): PostRequest {
-    Object.entries(fields).forEach(([key, value]) => {
-      this.fields.set(key, value)
-    })
+  public payload (fields): PostRequest {
+    this.fields = fields
 
     return this
   }

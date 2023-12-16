@@ -11,7 +11,7 @@ export enum ButtonSize {
 	SMALL = 'small',
 	TINY = 'tiny',
 }
-  
+
 export enum ButtonStyle {
 	NONE = 'none',
 	BASIC = 'basic',
@@ -96,7 +96,7 @@ export function Button (props: ButtonProps) {
     )
   } else {
     return (
-      <Link to={link} className={defineClass} onClick={onClick}>
+      <Link to={link} className={defineClass}>
         {content()}
       </Link>
     )

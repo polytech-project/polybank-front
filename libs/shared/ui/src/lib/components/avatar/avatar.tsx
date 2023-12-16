@@ -19,6 +19,7 @@ export interface AvatarProps {
   onClick?: () => void
   size?: number
   noTooltip?: boolean
+  rounded?: string
 }
 
 export function Avatar (props: AvatarProps) {
@@ -34,6 +35,7 @@ export function Avatar (props: AvatarProps) {
     onClick,
     size = 32,
     noTooltip = false,
+    rounded
   } = props
 
   const defineClass = `${style === AvatarStyle.STROKED ? 'border border-neutral-200' : ''} ${
@@ -49,9 +51,18 @@ export function Avatar (props: AvatarProps) {
     >
 
       { url ?
-        <img src={url} alt={alt} className="w-full h-full rounded-full" />
+        <img
+          src={url} alt={alt}
+          className={classNames(
+            'w-full h-full',
+            rounded || 'rounded-full'
+          )}
+        />
         :
-        <div className="w-full h-full rounded-full bg-neutral-200 text-center flex justify-center items-center">
+        <div className={classNames(
+          'w-full h-full rounded-full bg-neutral-200 text-center flex justify-center items-center',
+          rounded || 'rounded-full'
+        )}>
           <span className="text-xs text-neutral-400 font-medium relative">
             {username && username.charAt(0).toUpperCase()}
           </span>

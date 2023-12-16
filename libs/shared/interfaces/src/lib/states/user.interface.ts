@@ -4,4 +4,5 @@ export interface UserState {
   user?: UserEntity
   isAuthenticated: boolean
   isLoading: boolean
+  inviteUsers: string[]
 }

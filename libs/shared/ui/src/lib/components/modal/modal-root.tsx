@@ -1,5 +1,5 @@
 import {createContext, Dispatch, ReactNode, SetStateAction, useState} from "react";
-import {Modal, ModalProps} from "./modal";
+import {Modal} from "./modal";
 import ModalAlert from "../modal-alert/modal-alert";
 
 interface ModalOptions {

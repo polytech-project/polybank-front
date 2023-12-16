@@ -229,7 +229,7 @@ export function InputSelect ({
           </div>
         )}
 
-        <Select 
+        <Select
           autoFocus={autoFocus}
           options={options}
           isMulti={isMulti}
@@ -259,6 +259,7 @@ export function InputSelect ({
           onBlur={() => setFocused(false)}
           styles={{
             menuPortal: (base) => ({
+              backgroundColor: "red",
               ...base,
               zIndex: 50,
               pointerEvents: 'auto',
@@ -270,11 +271,7 @@ export function InputSelect ({
         />
 
         <input type="hidden" name={label} value={selectedValue} />
-        {!isFilter && (
-          <div className="absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none">
-            <Icon name="icon-solid-angle-down" className="text-sm text-neutral-400" />
-          </div>
-        )}
+
       </div>
       {error && <p className="px-4 mt-1 font-medium text-xs text-red-500">{error}</p>}
     </div>

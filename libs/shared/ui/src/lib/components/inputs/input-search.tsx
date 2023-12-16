@@ -47,14 +47,14 @@ export function InputSearch (props: InputSearchProps) {
 		<>
 			<div className={classNames('relative w-full ', className)}>
 
-				<MagnifyingGlassIcon className='w-4 absolute left-2 top-1/2 -translate-y-1/2' />
+				<MagnifyingGlassIcon className='w-4 absolute text-white left-2 top-1/2 -translate-y-1/2' />
 
-				<input 
+				<input
 					data-testid="input-search"
           ref={ref}
           autoFocus={autofocus}
 					className={classNames(
-						'w-full rounded border border-neutral-250 dark:border-neutral-400 bg-neutral-150 dark:bg-neutral-700 text-neutral-400 dark:text-neutral-350 placeholder:text-neutral-350 pl-8 pr-6 leading-none focus:outline-none focus:border-brand-400 focus:transition-[border-color]',
+						'w-full rounded border border-grey-400 dark:border-neutral-400 bg-grey-600 dark:bg-neutral-700 text-gray-100 dark:text-neutral-350 placeholder:text-neutral-350 pl-8 pr-6 leading-none focus:outline-none focus:border-brand-400 focus:transition-[border-color]',
 						customSize
 					)}
 					type='text'
@@ -73,9 +73,9 @@ export function InputSearch (props: InputSearchProps) {
 
 			{ isEmpty &&
 				<div>
-					{ emptyContent 
+					{ emptyContent
 						? emptyContent
-						: 
+						:
 						<div className="text-center px-3 py-6">
 							<Icon name={IconAwesomeEnum.WAVE_PULSE} className="text-neutral-350" />
 							<p className="text-neutral-350 font-medium text-xs mt-1">No result for this search</p>

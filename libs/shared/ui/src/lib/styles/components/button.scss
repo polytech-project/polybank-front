@@ -86,7 +86,7 @@
 
 // state
 .btn--disabled {
-  @apply cursor-default pointer-events-none bg-brand-100 text-brand-300 border-0;
+  @apply cursor-default pointer-events-none bg-grey-600 border border-grey-400 text-grey-200 ;
 }
 
 // login
