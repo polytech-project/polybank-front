@@ -1,7 +1,7 @@
-import {Controller, useFormContext} from "react-hook-form";
-import {Avatar, Button, ButtonStyle, InputText, SlideUpMenu} from "@polybank/ui";
-import {PhotoIcon} from "@heroicons/react/24/outline";
-import {UserEntity} from "@polybank/interfaces";
+import {Controller, useFormContext} from 'react-hook-form'
+import {Avatar, Button, ButtonStyle, InputText, SlideUpMenu} from '@polybank/ui'
+import {UserEntity} from '@polybank/interfaces'
+import {Dispatch, SetStateAction} from 'react'
 
 export interface AddExpenseProps {
   isModalOpen: boolean
@@ -9,9 +9,17 @@ export interface AddExpenseProps {
   disabled: boolean
   onSubmit: () => void
   users: UserEntity[]
+  amountPerUser?: string
+  usersIds: string[]
+  setUsersIds: Dispatch<SetStateAction<string[]>>
+  handleCheckboxChange: (userId: string) => void
 }
 
-export function AddExpense ({ isModalOpen, closeModal, disabled, onSubmit, users }: AddExpenseProps) {
+export function AddExpense ({
+  isModalOpen, closeModal, disabled, onSubmit, users,
+  usersIds, setUsersIds,
+  handleCheckboxChange, amountPerUser
+}: AddExpenseProps) {
   const { control } = useFormContext()
 
   return (
@@ -20,20 +28,6 @@ export function AddExpense ({ isModalOpen, closeModal, disabled, onSubmit, users
         <span className="font-bold text-md">Ajouter une dépense</span>
 
         <div className="flex flex-col gap-2">
-          {/*
-          <span className="text-xs">Category</span>
-
-          <div className="flex items-center gap-7 overflow-x-scroll">
-            {[0,1,3,4,4,4,4,4,4,4].map((item) => (
-              <div>
-                <div className="flex h-16 w-16 border flex-none items-center justify-center rounded-lg">
-                  <PhotoIcon className="p-1" />
-                </div>
-              </div>
-            ))}
-          </div>*/}
-
-
           <Controller
             name="title"
             control={control}
@@ -84,26 +78,11 @@ export function AddExpense ({ isModalOpen, closeModal, disabled, onSubmit, users
 
             <div className="border rounded-md border-grey-400 p-3 flex flex-col mt-3 divide-y divide-grey-400">
               {users.map((user) => (
-                <div className="flex items-center justify-between py-3">
-                  <div className="flex items-center gap-3">
-                    <input
-                      id="comments"
-                      aria-describedby="comments-description"
-                      name="comments"
-                      type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    />
-
-                    <div className="flex items-center gap-2">
-                      <Avatar rounded="rounded-md" username={user.username} url={user.avatar_url} />
-                      <span className="text-sm text-gray-300">{ user.username}</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    500.0€
-                  </div>
-                </div>
+                <User
+                  user={user} key={user.id}
+                  amount={amountPerUser} usersIds={usersIds}
+                  handleClick={handleCheckboxChange}
+                />
               ))}
             </div>
           </div>
@@ -121,5 +100,41 @@ export function AddExpense ({ isModalOpen, closeModal, disabled, onSubmit, users
         </div>
       </div>
     </SlideUpMenu>
+  )
+}
+
+interface UserProps {
+  user: UserEntity
+  amount?: string
+  handleClick: (userId: string) => void
+  usersIds: string[]
+}
+function User ({ user, amount, handleClick, usersIds }: UserProps) {
+  return (
+    <div className="flex items-center justify-between py-3">
+      <div className="flex items-center gap-3">
+        <input
+          id="comments"
+          onClick={() => handleClick(user.id)}
+          aria-describedby="comments-description"
+          name="comments"
+          type="checkbox"
+          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+        />
+
+        <div className="flex items-center gap-2">
+          <Avatar rounded="rounded-md" username={user.username} url={user.avatar_url} />
+          <span className="text-sm text-gray-300">{ user.username}</span>
+        </div>
+      </div>
+
+      <div>
+        { usersIds.includes(user.id) ? (
+          <div>{amount}€</div>
+        ) : (
+          <div>0€</div>
+        )}
+      </div>
+    </div>
   )
 }
