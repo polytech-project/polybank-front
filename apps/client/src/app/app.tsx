@@ -6,11 +6,11 @@ import { ROUTER } from "./main.router"
 
 export default function App() {
   return (
-    <div>
+    <div className="text-white">
         <Routes>
 
           <Route path={`${LOGIN_URL}/*`} element={<PageLogin />} />
-          { ROUTER.map((route) => 
+          { ROUTER.map((route) =>
             route.layout ? (
               <Route
                 key={route.path}

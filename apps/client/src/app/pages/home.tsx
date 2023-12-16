@@ -1,34 +1,20 @@
 import { Layout } from "@polybank/pages/layout";
-import { CreditCard, InputSearch } from '@polybank/ui'
 
 export default function Home () {
   return (
-    <Layout>
+    <div className="text-gray-200 px-4">
       <div>
-        <Header />
-        Home
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-semibold">Accueil</span>
+          <div>
 
-        
-      </div>
-    </Layout>
-  )
-}
-
-function Header () {
-  return (
-    <div className="p-4">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center">
-          <h1 className="text-2xl font-bold">Polybank</h1>
+          </div>
         </div>
-        <div>
-          impl
+
+        <div className="p-2 mt-6 border rounded-md bg-grey-600 border-grey-400">
+          <span className="text-grey-200">On arrive bientôt</span>
         </div>
       </div>
-      <div className="pt-3">
-        <InputSearch />
-      </div>
-      
     </div>
   )
 }

@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import {TooltipProvider} from "@radix-ui/react-tooltip";
 
 const container = document.getElementById('root') || document.createElement('div')
 const root = createRoot(container)
@@ -32,7 +33,9 @@ root.render(
       <ReactQueryDevtools initialIsOpen={false} />
       <Provider store={store}>
         <BrowserRouter>
-          <App />
+          <TooltipProvider>
+            <App />
+          </TooltipProvider>
         </BrowserRouter>
       </Provider>
     </QueryClientProvider>
