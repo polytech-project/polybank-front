@@ -1,9 +1,14 @@
 import { PreloadedState, combineReducers, configureStore } from "@reduxjs/toolkit"
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { userReducer, initialUserState } from '@polybank/domains/users'
+import {projects} from '@polybank/domains/projects'
 
+export const projectReducer = combineReducers({
+  projects: projects
+})
 export const rootReducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  project: projectReducer
 })
 
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
