@@ -15,6 +15,7 @@ const root = createRoot(container)
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      refetchOnWindowFocus: false,
       onSuccess(data) {
         console.log('onSuccess', data)
       },
