@@ -22,7 +22,13 @@ export function PageGeneral ({ isLoading }: PageGeneralProps) {
   )
 }
 
-function Item ({ title, subtitle, icon, link }) {
+interface ItemProps {
+  title: string
+  subtitle: string
+  icon: string
+  link: string
+}
+function Item ({ title, subtitle, icon, link }: ItemProps) {
   return (
     <Link to={link}>
       <div className='flex items-stretch gap-4'>
@@ -35,6 +41,5 @@ function Item ({ title, subtitle, icon, link }) {
         </div>
       </div>
     </Link>
-    
   )
 }

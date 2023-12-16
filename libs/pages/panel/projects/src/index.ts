@@ -1,1 +1,1 @@
-export * from './lib/pages-panel-projects';
+export * from './lib/page-projects';

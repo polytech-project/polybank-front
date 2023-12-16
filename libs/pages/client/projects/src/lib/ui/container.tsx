@@ -1,11 +1,10 @@
 import { PropsWithChildren, useState } from "react";
-import { Button, ButtonStyle, SlideUpMenu } from "@polybank/ui"
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 
 export function Container ({ children }: PropsWithChildren) {
   return (
     <>
-      <Header />
+
       <div className="flex-col flex h-full">
         { children }
       </div>
@@ -28,7 +27,7 @@ function Header () {
           </div>
 
           {/* <div>
-            <Button 
+            <Button
               style={ButtonStyle.DARK}
               onClick={() => setLoad(!load)}
               loading={load}
@@ -36,10 +35,10 @@ function Header () {
               Créer un projet
             </Button>
           </div> */}
-        
+
         </div>
-       
-      </div>      
+
+      </div>
     </div>
   )
 }
