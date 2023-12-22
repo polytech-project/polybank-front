@@ -1,9 +1,7 @@
-import {PageProjectGeneral} from "../ui/page-project-general";
-import {useParams} from "react-router";
-import {useEffect} from "react";
-import {projects, useFetchProject} from "@polybank/domains/projects";
-import {useSelector} from "react-redux";
-import {Skeleton} from "@polybank/ui";
+import {PageProjectGeneral} from '../ui/page-project-general'
+import {useParams} from 'react-router'
+import {useEffect} from 'react'
+import {useFetchProject} from '@polybank/domains/projects'
 
 export function PageProjectGeneralFeature () {
   const { projectId = '' } = useParams()
@@ -21,8 +19,10 @@ export function PageProjectGeneralFeature () {
 
       { data && (
         <PageProjectGeneral
-          project={data}
-          expenses={[]}
+          project={data.project}
+          expense={data.expenses}
+          balances={data.balances}
+          transactions={data.project.transactions}
         />
       )}
 

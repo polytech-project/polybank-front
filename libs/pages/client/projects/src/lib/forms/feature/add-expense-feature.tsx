@@ -2,6 +2,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {AddExpense} from "../ui/add-expense";
 import {useEffect, useState} from "react";
 import {ProjectEntity} from "@polybank/interfaces";
+import {projects, useCreateTransaction} from "@polybank/domains/projects";
 
 export interface AddExpenseFeatureProps {
   onClose: () => void
@@ -14,17 +15,32 @@ export function AddExpenseFeature({ onClose, open, project }: AddExpenseFeatureP
   const [usersIds, setUsersIds] = useState<string[]>([])
   const [amountPerUser, setAmountPerUser] = useState<string>()
   const [amount, setAmount] = useState(0)
+  const { mutate: createTransaction } = useCreateTransaction()
 
   const methods = useForm({
     mode: 'onChange',
     defaultValues: {
       amount: 0,
-      title: "Restaurant"
+      title: "Restaurant",
+      paid_by: ''
     }
   })
 
   const onSubmit = methods.handleSubmit((data) => {
-    console.log(data)
+    console.log(data, usersIds, typeof data.amount)
+    const payload = {
+      title: data.title,
+      amount: data.amount,
+      paid_by: data.paid_by,
+      users: usersIds
+    }
+
+    createTransaction({
+      projectId: project.id,
+      data: payload
+    })
+
+    onClose()
   })
 
   function handleCheckboxChange(userId: string) {

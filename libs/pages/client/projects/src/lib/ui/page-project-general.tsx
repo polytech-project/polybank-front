@@ -1,14 +1,17 @@
-import {ExpenseEntity, ProjectEntity} from '@polybank/interfaces'
+import {TransactionEntity, ProjectEntity} from '@polybank/interfaces'
 import {PROJECT_OVERVIEW_URL, PROJECT_STATS_URL, PROJECTS_GENERAL_URL} from '@polybank/routes'
 import {SettingsProjectModalFeature} from '../forms/feature/settings-project-modal-feature'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {HeaderProject} from '../components/header_project'
 import {Button, ButtonStyle} from '@polybank/ui'
 import {AddExpenseFeature} from '../forms/feature/add-expense-feature'
+import {Transaction} from "../components/transaction";
 
 export interface PageProjectGeneralProps {
   project: ProjectEntity
-  expenses: ExpenseEntity[]
+  transactions: TransactionEntity[]
+  balances: any[]
+  expense: number
 }
 
 const tabs = [
@@ -16,16 +19,33 @@ const tabs = [
   { name: 'Statistiques', href: (id: string) => PROJECT_OVERVIEW_URL(id) + PROJECT_STATS_URL, current: false },
 ]
 
-export function PageProjectGeneral ({ project, expenses }: PageProjectGeneralProps) {
+export function PageProjectGeneral ({ project, transactions, expense, balances }: PageProjectGeneralProps) {
   const [open, setOpen] = useState(false)
   const [expenseModalOpen, setExpenseModalOpen] = useState<boolean>(false)
+
+
   return (
     <>
-      <HeaderProject project={project} setIsOpen={() => setOpen(true)} tabs={tabs} />
+      <HeaderProject
+        project={project}
+        expense={expense}
+        transactions={transactions}
+        balances={balances}
+        setIsOpen={() => setOpen(true)}
+        tabs={tabs}
+      />
+
       <div className="px-3">
         <div className="flex flex-col">
-          { expenses.length ? (
-            <div>Afficher les dépenses</div>
+          { transactions.length ? (
+            <div className="flex flex-col divide-y divide-grey-400">
+              { transactions.map((transaction) => (
+                <Transaction
+                  transaction={transaction}
+                  balances={balances}
+                />
+              ))}
+            </div>
           ) : (
             <div>Aucune dépenses
             </div>

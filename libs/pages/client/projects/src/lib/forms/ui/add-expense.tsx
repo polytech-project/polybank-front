@@ -1,7 +1,8 @@
 import {Controller, useFormContext} from 'react-hook-form'
-import {Avatar, Button, ButtonStyle, InputText, SlideUpMenu} from '@polybank/ui'
+import {Avatar, Button, ButtonStyle, InputSelect, InputSelectSmall, InputText, SlideUpMenu} from '@polybank/ui'
 import {UserEntity} from '@polybank/interfaces'
 import {Dispatch, SetStateAction} from 'react'
+import {projects} from "@polybank/domains/projects";
 
 export interface AddExpenseProps {
   isModalOpen: boolean
@@ -62,6 +63,33 @@ export function AddExpense ({
               />
             )}
           />
+          <Controller
+            name="paid_by"
+            control={control}
+            rules={{
+              required: 'Please select a cloud provider.',
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <InputSelect
+                label="Payé par"
+                className="mb-3"
+                placeholder="Choississez l'utilisateur"
+                options={users.map((user) => {
+                  return {
+                    label: user.username,
+                    value: user.id,
+                    icon: <Avatar username={user.username} url={user.avatar_url} />
+                  }
+                })}
+                onChange={(value) => {
+                  field.onChange(value)
+                }}
+                value={field.value}
+                error={error?.message}
+              />
+            )}
+          />
+
 
 
           <div>
