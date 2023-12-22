@@ -52,7 +52,7 @@ export function InputSelect ({
   const [selectedItems, setSelectedItems] = useState<MultiValue<Value> | SingleValue<Value>>([])
   const [selectedValue, setSelectedValue] = useState<string | string[]>([])
 
-  const selectedWithIconClassName = 'ml-8'
+  const selectedWithIconClassName = 'ml-2'
 
   const hasFocus = focused
   const hasError = error ? 'input--error' : ''
@@ -123,20 +123,21 @@ export function InputSelect ({
     return (
       <div role="option" aria-labelledby={id} aria-selected>
         <components.Option {...props}>
-          {isMulti ? (
-            <span className="input-select__checkbox">
+          <div className="flex items-center gap-2 text-neutral-600">
+            {isMulti ? (
+              <span className="input-select__checkbox">
               {props.isSelected && <Icon name={IconAwesomeEnum.CHECK} className="text-xs" />}
             </span>
-          ) : props.isSelected ? (
-            <Icon name={IconAwesomeEnum.CHECK} className="text-green-500" />
-          ) : props.data.icon ? (
-            <div className="w-4 h-full flex items-center justify-center">{props.data.icon}</div>
-          ) : (
-            <Icon name={IconAwesomeEnum.CHECK} className="opacity-0" />
-          )}
-          <label id={id} className="ml-2 truncate">
-            {props.label}
-          </label>
+            ) : props.data.icon ? (
+              <div className="flex items-center justify-center">{props.data.icon}</div>
+            ) : (
+              <Icon name={IconAwesomeEnum.CHECK} className="opacity-0" />
+            )}
+            <label id={id} className="ml-2 truncate">
+              {props.label}
+            </label>
+          </div>
+
         </components.Option>
       </div>
     )
@@ -150,7 +151,7 @@ export function InputSelect ({
   )
 
   const SingleValue = (props: SingleValueProps<Value>) => (
-    <span className="text-sm text-neutral-400 mr-1">{props.data.label}</span>
+    <span className="text-sm text-neutral-400 mr-1 transform -translate-y-3 ml-12">{props.data.label}</span>
   )
 
   const NoOptionsMessage = (props: NoticeProps<Value>) => {
@@ -158,7 +159,7 @@ export function InputSelect ({
       <components.NoOptionsMessage {...props}>
         <div className="text-center px-3 py-6">
           <Icon name={IconAwesomeEnum.WAVE_PULSE} className="text-neutral-350" />
-          <p className="text-neutral-350 font-medium text-xs mt-1">No result for this search</p>
+          <p className="text-neutral-350 font-medium text-xs mt-1">Aucun résultat à vous fournir</p>
         </div>{' '}
       </components.NoOptionsMessage>
     )
@@ -186,10 +187,10 @@ export function InputSelect ({
     <div className={className}>
       <div
         className={classNames(
-          'input input--select',
+          'input--select relative',
           hasIcon ? 'input--has-icon' : '',
           inputActions,
-          disabled ? '!bg-neutral-100 !border-neutral-250' : '',
+          disabled ? '!border-neutral-250' : '',
           isFilter ? 'input--filter' : '',
         )}
         data-testid={dataTestId || 'select'}
@@ -197,7 +198,7 @@ export function InputSelect ({
         { hasIcon && (
           <div
             data-testid="selected-icon"
-            className="w-12 h-full absolute left-0 top-0 flex items-center justify-center"
+            className="w-12 absolute left-0 top-8 z-50 flex items-center justify-center"
           >
             { currentIcon.icon }
           </div>
@@ -206,6 +207,7 @@ export function InputSelect ({
           <label
             htmlFor={label}
             className={classNames(
+              'text-neutral-200',
               hasIcon
               ? `!text-xs !translate-y-0 ${selectedWithIconClassName}`
               : `${hasLabelUp ? '!text-xs !translate-y-0' : 'text-sm translate-y-2 top-1.5'}`
@@ -259,13 +261,13 @@ export function InputSelect ({
           onBlur={() => setFocused(false)}
           styles={{
             menuPortal: (base) => ({
-              backgroundColor: "red",
               ...base,
               zIndex: 50,
               pointerEvents: 'auto',
               // Prevent misplacement with intercom banner
               marginTop: `-${document.body.style.marginTop ? document.body.style.marginTop : 0}`,
             }),
+
           }}
           menuIsOpen={isFilter ? true : undefined }
         />
