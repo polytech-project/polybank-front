@@ -2,7 +2,9 @@
   "name": "@polybank-front/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx run-many --all --target=build --parallel"
+  },
   "private": true,
   "dependencies": {
     "@heroicons/react": "^2.0.18",
