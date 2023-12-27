@@ -23,3 +23,6 @@ export function ReactElement({ tag, children, ...props}: ReactElementProps): JSX
 export function around (x: number): number {
   return Math.round(100*x)/100
 }
+
+export const upperCaseFirstLetter = (string: string | undefined) =>
+  string && `${string.slice(0,1).toUpperCase()}${string.toLowerCase().slice(1)}`
