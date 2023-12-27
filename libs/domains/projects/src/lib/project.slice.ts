@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } from "@reduxjs/toolkit"
-import {CreateProjectRequest, ProjectEntity, ProjectsState, ProjectResponse} from '@polybank/interfaces'
+import {CreateProjectRequest, ProjectEntity, ProjectsState, ProjectResponse } from '@polybank/interfaces'
 import { apiClient } from '@polybank/api-client'
 import {useMutation, useQueryClient} from "react-query"
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -9,11 +9,16 @@ export const PROJECT_KEY = 'project'
 export const projectAdapter = createEntityAdapter<ProjectEntity>()
 
 export const fetchProjects = createAsyncThunk('projects/fetch', async (data) => {
-  console.log("test fethc projects")
   const response = await apiClient.get<ProjectResponse>('/projects?me=true').build()
 
   return response.data
 })
+
+export const fetchProject = createAsyncThunk(
+  'project/fetch', async (project: ProjectEntity) => {
+    return project
+  }
+)
 
 export const useCreateProject = (
   onSuccessCallback?: (result: ProjectEntity) => void,
@@ -36,7 +41,8 @@ export const useCreateProject = (
 export const initialProjectsState: ProjectsState = projectAdapter.getInitialState({
   loadingStatus: 'not loaded',
   error: null,
-  meta: null
+  meta: null,
+  project: null
 })
 
 export const projectsSlice = createSlice({
@@ -54,6 +60,9 @@ export const projectsSlice = createSlice({
 
         state.loadingStatus = 'loaded'
       })
+      .addCase(fetchProject.fulfilled, (state: ProjectsState, action) => {
+        state.project = action.payload
+      })
   }
 })
 
@@ -65,3 +74,8 @@ const { selectAll } = projectAdapter.getSelectors()
 export const getProjectState = (rootState: RootState): ProjectsState => rootState['project'].projects
 
 export const selectAllProjects = createSelector(getProjectState, selectAll)
+
+export const selectProject = createSelector(
+  getProjectState,
+  (projectState) => projectState.project
+)

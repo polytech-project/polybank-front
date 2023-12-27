@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
 import { LOGIN_URL } from '@polybank/routes'
-import { PageLoginPanel } from '@polybank/pages/login'
+import {PageLogin, PageLoginPanel} from '@polybank/pages/login'
 import { LayoutPanel } from '@polybank/pages/layout'
 import { ROUTER } from "./main.router"
 
@@ -8,10 +8,10 @@ export default function App() {
   return (
     <div>
       <Routes>
-        <Route path={`${LOGIN_URL}/*`} element={<PageLoginPanel />} />
+        <Route path={`${LOGIN_URL}/*`} element={<PageLogin />} />
         { ROUTER.map((route) =>
           route.layout ? (
-            <Route 
+            <Route
               key={route.path}
               path={route.path}
               element={
@@ -25,7 +25,7 @@ export default function App() {
               element={route.component}
             />
           )
-        
+
         )}
         <Route path="*" element={<Navigate replace to={LOGIN_URL} />} />
       </Routes>

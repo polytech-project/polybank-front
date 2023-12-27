@@ -1,7 +1,8 @@
 import { PreloadedState, combineReducers, configureStore } from "@reduxjs/toolkit"
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { userReducer, initialUserState } from '@polybank/domains/users'
-import {projects} from '@polybank/domains/projects'
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import {initialProjectsState, projects} from '@polybank/domains/projects'
 
 export const projectReducer = combineReducers({
   projects: projects
@@ -27,5 +28,8 @@ export type AppStore = ReturnType<typeof setupStore>
 export type AppDispatch = AppStore['dispatch']
 
 export const initialRootState = (): RootState => ({
-  user: initialUserState
+  user: initialUserState,
+  project: {
+    projects: initialProjectsState
+  }
 })
