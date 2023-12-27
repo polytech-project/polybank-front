@@ -1,5 +1,4 @@
-import { PropsWithChildren, useState } from "react";
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
+import { PropsWithChildren } from "react";
 
 export function Container ({ children }: PropsWithChildren) {
   return (
@@ -12,33 +11,3 @@ export function Container ({ children }: PropsWithChildren) {
   )
 }
 
-function Header () {
-  const [load, setLoad] = useState(false)
-  return (
-    <div className="bg-slate-100 h-24 flex content-end flex-col ">
-      <div className="absolute top-4 left-3">
-        <ArrowLeftIcon className="w-6 font-bold"  />
-      </div>
-
-      <div className=" h-full items-end flex flex-row justify-between">
-        <div className="flex items-center justify-between w-full px-3 pb-3">
-          <div>
-            <h1 className="text-2xl font-bold">Projets</h1>
-          </div>
-
-          {/* <div>
-            <Button
-              style={ButtonStyle.DARK}
-              onClick={() => setLoad(!load)}
-              loading={load}
-            >
-              Créer un projet
-            </Button>
-          </div> */}
-
-        </div>
-
-      </div>
-    </div>
-  )
-}

@@ -5,7 +5,7 @@ export function Container({ children }: PropsWithChildren) {
   return (
     <>
       <Header title="Projets" icon={IconEnum.ENVIRONMENT} />
-      <div className="flex-grow flex-col flex">{ children }</div>
+      <div className="flex-grow flex-col flex mt-4">{ children }</div>
     </>
   )
 

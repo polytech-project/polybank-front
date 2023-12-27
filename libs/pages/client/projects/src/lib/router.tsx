@@ -1,7 +1,8 @@
-import {PROJECT_STATS_URL, PROJECTS_GENERAL_URL, Route} from "@polybank/routes"
+import {PROJECT_SETTLEUP_URL, PROJECTS_GENERAL_URL, Route} from "@polybank/routes"
 import { PageGeneralFeature } from "./feature/page-general-feature"
 import {PageProjectGeneralFeature} from "./feature/page-project-general-feature";
-import {PageProjectStatsFeature} from "./feature/page-project-stats-feature";
+import {PageProjectSettleupFeature} from "./feature/page-project-settleup-feature";
+import {PageTransactionGeneralFeature} from "./feature/page-transaction-general-feature";
 
 export const ROUTER_CLIENT_PROJECTS: Route[] = [
   {
@@ -13,7 +14,11 @@ export const ROUTER_CLIENT_PROJECTS: Route[] = [
     component: <PageProjectGeneralFeature />
   },
   {
-    path: '/:projectId' + PROJECT_STATS_URL,
-    component: <PageProjectStatsFeature />
+    path: '/:projectId' + PROJECT_SETTLEUP_URL,
+    component: <PageProjectSettleupFeature />
+  },
+  {
+    path: '/:projectId/transactions/:transactionId',
+    component: <PageTransactionGeneralFeature />
   }
 ]

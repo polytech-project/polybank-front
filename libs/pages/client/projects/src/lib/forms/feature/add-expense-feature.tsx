@@ -32,7 +32,8 @@ export function AddExpenseFeature({ onClose, open, project }: AddExpenseFeatureP
       title: data.title,
       amount: data.amount,
       paid_by: data.paid_by,
-      users: usersIds
+      users: usersIds,
+      type: 'expense'
     }
 
     createTransaction({

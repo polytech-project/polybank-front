@@ -1,4 +1,4 @@
-import {ProjectEntity, TransactionEntity} from "@polybank/interfaces";
+import {Balance, ProjectEntity, TransactionEntity} from "@polybank/interfaces";
 import {Link} from "react-router-dom";
 import {ArrowLeftIcon} from "@heroicons/react/20/solid";
 import {Cog8ToothIcon} from "@heroicons/react/24/outline";
@@ -12,14 +12,14 @@ export interface HeaderProjectProps {
   project: ProjectEntity
   setIsOpen: () => void
   tabs: { name: string, href: (id: string) => string, current: boolean}[]
-  balances: any[]
+  balances: Balance[]
   transactions: TransactionEntity[]
   expense: number
 }
 
 export function HeaderProject ({ project, setIsOpen, tabs, expense, balances, transactions}: HeaderProjectProps) {
   const user = useSelector(getUserState)
-  const [currentBalance, setCurrentBalance] = useState()
+  const [currentBalance, setCurrentBalance] = useState<Balance>()
   const [totalPaid, setTotalPaid] = useState(0)
   const [totalShare, setTotalShare] = useState(0)
 
@@ -35,7 +35,6 @@ export function HeaderProject ({ project, setIsOpen, tabs, expense, balances, tr
 
     transactions.forEach((transaction) => {
       const usersIds = transaction.users!.map((u) => u.id)
-      console.log(transaction)
       if (usersIds.includes(user.user!.id)) {
         setTotalPaid((oldValue) => oldValue + transaction.amount / transaction.users!.length)
       }

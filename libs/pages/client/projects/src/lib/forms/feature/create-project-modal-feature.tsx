@@ -32,7 +32,6 @@ export function CreateProjectModalFeature ({ onClose, open }: CreateProjectModal
 
   useEffect(() => {
     const subscribe = methods.watch((data) => {
-      console.log(data)
       if (data.name) {
         setDisabled(false)
       } else {

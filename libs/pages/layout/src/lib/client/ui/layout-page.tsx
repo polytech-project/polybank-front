@@ -14,7 +14,7 @@ export default function LayoutPage ({ children }: PropsWithChildren) {
   const matchProjectsRoute = pathname.includes(`/projects`)
 
   return (
-    <main className="h-screen overflow-x-hidden bg-grey-500">
+    <main className="h-screen bg-grey-500 overflow-hidden">
       <div className="p-4">
         <div className="flex justify-between items-center border-b border-grey-400 pb-4">
           <img src="/logo.png" className="w-6 mx-auto" alt="logo polybank"/>

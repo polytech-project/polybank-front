@@ -20,8 +20,20 @@ export function PageGeneral ({ projects }: PageGeneralProps) {
             </div>
 
           ): (
-            <div>
-              Pas de projets
+            <div className="flex flex-col gap-12">
+              <div className="flex flex-col text-center">
+                <span className="text-lg font-semibold">Créer ton premier projet</span>
+                <span className="text-gray-500">azdada</span>
+              </div>
+
+              <div className="mx-auto">
+                <Button
+                  onClick={() => setOpen(true)}
+                >
+                  Créer ton projet
+                </Button>
+              </div>
+
             </div>
           )}
         </div>

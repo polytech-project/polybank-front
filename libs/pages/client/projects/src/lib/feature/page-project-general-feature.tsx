@@ -1,17 +1,22 @@
 import {PageProjectGeneral} from '../ui/page-project-general'
 import {useParams} from 'react-router'
 import {useEffect} from 'react'
-import {useFetchProject} from '@polybank/domains/projects'
+import {fetchProject, useFetchProject} from '@polybank/domains/projects'
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "@polybank/state/store";
 
 export function PageProjectGeneralFeature () {
   const { projectId = '' } = useParams()
+  const dispatch = useDispatch<AppDispatch>()
 
   const { data } = useFetchProject(projectId)
 
 
   useEffect(() => {
-    console.log(data)
-  }, [data]);
+    if (data) {
+      dispatch(fetchProject(data.project))
+    }
+  }, [data, dispatch]);
 
   //const project = useSelector()
   return (

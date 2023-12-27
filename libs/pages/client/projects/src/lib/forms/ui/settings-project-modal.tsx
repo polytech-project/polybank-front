@@ -1,12 +1,14 @@
 import {Button, ButtonStyle, InputSelect, InputSelectSmall, InputText, InputTextArea, SlideUpMenu} from "@polybank/ui";
 import {Controller, useFormContext} from "react-hook-form";
 import {CloudIcon} from "@heroicons/react/24/outline";
+import {ProjectEntity} from "@polybank/interfaces";
 
 export interface SettingsProjectModalProps {
   isModalOpen: boolean
   closeModal: () => void
+  project: ProjectEntity
 }
-export function SettingsProjectModal ({ isModalOpen, closeModal }: SettingsProjectModalProps) {
+export function SettingsProjectModal ({ isModalOpen, closeModal, project }: SettingsProjectModalProps) {
   const { control, setValue } = useFormContext()
 
   return (
@@ -14,7 +16,7 @@ export function SettingsProjectModal ({ isModalOpen, closeModal }: SettingsProje
       isOpen={isModalOpen} onClose={closeModal}
     >
       <div className="pb-8 pt-4 flex flex-col gap-4">
-        <span className="text-center font-bold text-md">Paramètres</span>
+        <span className="text-center font-bold text-md">Paramètres { project.title }</span>
         <div>
           <div className="flex flex-col gap-4">
             <Controller
@@ -23,6 +25,7 @@ export function SettingsProjectModal ({ isModalOpen, closeModal }: SettingsProje
               rules={{
                 required: 'Please enter a value'
               }}
+              defaultValue={project.title}
               render={({ field, fieldState: { error } }) => (
                 <InputText
                   label="Nom du projet"

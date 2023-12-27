@@ -1,27 +1,30 @@
-import { TransactionEntity} from '@polybank/interfaces'
+import {Balance, TransactionEntity} from '@polybank/interfaces'
 import {useSelector} from "react-redux";
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {getUserState} from "@polybank/domains/users";
 import {useEffect, useState} from "react";
 import {classNames} from "@polybank/utils";
+import {Link} from "react-router-dom";
+import {useParams} from "react-router";
 
 export interface TransactionProps {
   transaction: TransactionEntity
-  balances: any[]
+  balances: Balance[]
 }
 
 export function Transaction ({ transaction, balances }: TransactionProps) {
-  const [currentBalance, setCurrentBalance] = useState()
+  const { projectId = '' } = useParams()
+  const [currentBalance, setCurrentBalance] = useState<Balance | null>(null)
   const user = useSelector(getUserState).user!
 
   useEffect(() => {
     if (!user) return
     const balance = balances.find(b => b.id === transaction.paid_by)
-    setCurrentBalance(balance)
+    setCurrentBalance(balance!)
   }, [balances, user]);
 
   return (
-    <li key={transaction.id} className="flex justify-between gap-x-6 py-5">
+    <Link to={`/projects/${projectId}/transactions/${transaction.id}`} key={transaction.id} className="flex justify-between gap-x-6 py-5">
       <div className="flex items-center gap-2">
         <div className="flex flex-col text-xs text-grey-100 text-center text-thin">
           <span>17</span>
@@ -90,6 +93,6 @@ export function Transaction ({ transaction, balances }: TransactionProps) {
         )}
 
       </div>
-    </li>
+    </Link>
   )
 }

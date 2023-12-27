@@ -3,13 +3,25 @@ import {ProjectEntity, UserEntity} from '@polybank/interfaces'
 import {Link} from 'react-router-dom'
 import {PROJECTS_GENERAL_URL} from "@polybank/routes";
 import {CakeIcon} from "@heroicons/react/20/solid";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Avatar} from "@polybank/ui";
+import {useSelector} from "react-redux";
+import {getUserState} from "@polybank/domains/users";
+import {am} from "vitest/dist/types-198fd1d9";
 
 export interface ProjectProps {
     project: ProjectEntity
 }
 export default function Project ({ project }: ProjectProps) {
+  const [amount, setAmount] = useState(0)
+  const user = useSelector(getUserState).user
+  useEffect(() => {
+    if (!user) return
+    const refund = project.refunds.find((r) => r.id === user.id)
+    if (!refund) return
+
+    setAmount(refund.amount)
+  }, [project, user])
   return (
     <Link
       to={`/projects/${project.id}` + PROJECTS_GENERAL_URL}
@@ -32,8 +44,17 @@ export default function Project ({ project }: ProjectProps) {
       </div>
       <div className="border-t p-3 border-grey-400">
         <div className="flex flex-col text-grey-100  text-sm">
-          <span className="">Total Cost: <span className="ml-2">100.000€</span></span>
-          <span>You Owed: <span className="ml-2">54.000€</span></span>
+          <span className="">Total des dépenses: <span className="ml-2">{ project.expense.toFixed(2)}€</span></span>
+          <span className="flex items-center">
+
+            { amount < 0 ? (
+              <span>Tu dois:</span>
+            ) : (
+              <span>On te doit:</span>
+            )}
+            <span className="ml-2">{Math.abs(amount).toFixed(2)}€</span>
+          </span>
+
         </div>
 
         <div>
@@ -54,6 +75,7 @@ function ListAvatars ({ users }: ListAvatarsProps) {
     <div className="isolate flex -space-x-1  p-1">
       { users.map((user) => (
         <Avatar
+          key={user.id}
           username={user.username}
           url={user.avatar_url}
           className="relative z-0 inline-block !h-6 !w-6 rounded-full ring-2 ring-grey-300"
