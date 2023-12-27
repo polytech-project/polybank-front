@@ -35,7 +35,7 @@ class PostRequest extends Request {
 
   constructor(private url: string) { super() }
 
-  public payload (fields): PostRequest {
+  public payload (fields: any): PostRequest {
     this.fields = fields
 
     return this
@@ -71,4 +71,4 @@ class PutRequest extends Request {
     })
   }
 }
-export const apiClient = new ApiClient('http://localhost:3333')
+export const apiClient = new ApiClient(import.meta.env.VITE_API)

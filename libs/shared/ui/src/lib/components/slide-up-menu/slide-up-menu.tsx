@@ -57,32 +57,37 @@ export function SlideUpMenu ({ children, isOpen, onClose, className }: SlideUpMe
 
 
   return (
-    <div
-      className={classNames(
-        "fixed  left-0 shadow right-0 transition-all bottom-0 transform  duration-300 ease-in-out  z-[100]",
-        isOpen ? 'translate-y-0' : 'translate-y-full',
-        className || ''
-      )}
-      ref={menuRef}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onMouseDown={handleMouseDown}
-    >
+    <div className={classNames(
+      'fixed left-0 bottom-0 w-full z-[100] bg-opacity-20 backdrop-blur-[2px] ',
+      isOpen ? 'bg-grey-600 h-full ' : 'bg-none'
+    )}>
       <div
         className={classNames(
+          "fixed  left-0 shadow right-0 transition-all bottom-0 transform  duration-300 ease-in-out  z-[100]",
           isOpen ? 'translate-y-0' : 'translate-y-full',
-          'transform origin-bottom transition-transform duration-300'
+          className || ''
         )}
-
+        ref={menuRef}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onMouseDown={handleMouseDown}
       >
-        <div className="bg-grey-600  shadow-lg border-t border-grey-400  rounded-t-md p-2 ">
-          <div
-            className="w-10 rounded-full h-1.5 bg-grey-300 m-auto cursor-pointer"
-          />
-          { children }
-        </div>
+        <div
+          className={classNames(
+            isOpen ? 'translate-y-0' : 'translate-y-full',
+            'transform origin-bottom transition-transform duration-300'
+          )}
 
+        >
+          <div className="bg-grey-600  shadow-lg border-t border-grey-400  rounded-t-md p-2 ">
+            <div
+              className="w-10 rounded-full h-1.5 bg-grey-300 m-auto cursor-pointer"
+            />
+            { children }
+          </div>
+
+        </div>
       </div>
     </div>
 
