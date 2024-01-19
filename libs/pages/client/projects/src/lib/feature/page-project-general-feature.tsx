@@ -2,8 +2,9 @@ import {PageProjectGeneral} from '../ui/page-project-general'
 import {useParams} from 'react-router'
 import {useEffect} from 'react'
 import {fetchProject, useFetchProject} from '@polybank/domains/projects'
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "@polybank/state/store";
+import {useDispatch} from 'react-redux'
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import {AppDispatch} from '@polybank/state/store'
 
 export function PageProjectGeneralFeature () {
   const { projectId = '' } = useParams()
@@ -16,7 +17,7 @@ export function PageProjectGeneralFeature () {
     if (data) {
       dispatch(fetchProject(data.project))
     }
-  }, [data, dispatch]);
+  }, [data, dispatch])
 
   //const project = useSelector()
   return (

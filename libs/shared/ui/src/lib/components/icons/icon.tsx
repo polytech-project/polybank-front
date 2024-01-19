@@ -1,6 +1,14 @@
 import {IconAwesomeEnum, IconEnum} from "@polybank/enums";
 import {PlusIcon} from '@heroicons/react/24/outline'
-import { AcademicCapIcon, ChevronDownIcon, Cog6ToothIcon, EllipsisVerticalIcon, EyeIcon, MagnifyingGlassCircleIcon, WalletIcon } from '@heroicons/react/20/solid'
+import {
+  AcademicCapIcon,
+  ChevronDownIcon, CloudIcon,
+  Cog6ToothIcon,
+  EllipsisVerticalIcon,
+  EyeIcon,
+  MagnifyingGlassCircleIcon,
+  WalletIcon
+} from '@heroicons/react/20/solid'
 
 import {GithubIcon, GithubWhiteIcon} from './icons/github'
 import DeleteIcon from './icons-status/delete'
@@ -65,7 +73,9 @@ export function Icon (props: IconProps) {
       return <EllipsisVerticalIcon {...formattedProps} />
     case IconAwesomeEnum.MAGNIFYING_GLASS:
       return <MagnifyingGlassCircleIcon {...formattedProps} />
-    
+    case IconAwesomeEnum.CLOUD:
+      return <CloudIcon {...formattedProps} />
+
 
     /* ----- */
 

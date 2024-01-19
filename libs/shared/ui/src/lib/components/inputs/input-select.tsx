@@ -1,6 +1,6 @@
 import { Value } from "@polybank/interfaces"
 import { ReactNode, useEffect, useId, useState } from "react"
-import Select, { GroupBase, MenuListProps, MultiValue, MultiValueProps, NoticeProps, OptionProps, SingleValue, SingleValueProps, components } from "react-select"
+import Select, { GroupBase, MenuListProps, MenuPlacement, MultiValue, MultiValueProps, NoticeProps, OptionProps, SingleValue, SingleValueProps, components } from "react-select"
 import { Tooltip } from "../tooltip/tooltip"
 import { IconAwesomeEnum } from "@polybank/enums"
 import { Icon } from "../icons/icon"
@@ -28,9 +28,10 @@ export interface InputSelectProps {
   isFilter?: boolean
   autoFocus?: boolean
   placeholder?: string
+  menuPlacement?: MenuPlacement
 }
 
-export function InputSelect ({
+export function InputSelect({
   className = '',
   label,
   value,
@@ -47,19 +48,19 @@ export function InputSelect ({
   autoFocus = false,
   placeholder,
   menuListButton,
+  menuPlacement = 'auto',
 }: InputSelectProps) {
   const [focused, setFocused] = useState(false)
   const [selectedItems, setSelectedItems] = useState<MultiValue<Value> | SingleValue<Value>>([])
   const [selectedValue, setSelectedValue] = useState<string | string[]>([])
 
-  const selectedWithIconClassName = 'ml-2'
+  const selectedWithIconClassName = 'ml-8'
 
   const hasFocus = focused
   const hasError = error ? 'input--error' : ''
 
   const handleChange = (values: MultiValue<Value> | SingleValue<Value>) => {
     setSelectedItems(values)
-
 
     if (isMulti) {
       const vals = (values as MultiValue<Value>).map((value) => value.value)
@@ -99,8 +100,8 @@ export function InputSelect ({
   const MenuList = (props: MenuListProps<Value, true, GroupBase<Value>>) => (
     <div role="listbox">
       <components.MenuList {...props}>
-        { props.children }
-        { menuListButton && (
+        {props.children}
+        {menuListButton && (
           <button
             data-testid="input-menu-list-button"
             type="button"
@@ -108,7 +109,7 @@ export function InputSelect ({
             className="input-select__button w-full mt-4 relative before:content-[''] before:w-full before:h-[1px] before:block before:bg-neutral-150 before:absolute before:-top-2 before:left-0"
             onClick={menuListButton.onClick}
           >
-            <div className="w-4 h-full flex items-center justify-center">{ menuListButton.icon }</div>
+            <div className="w-4 h-full flex items-center justify-center">{menuListButton.icon}</div>
             <Tooltip content={menuListButton.label}>
               <label className="ml-2 truncate">{menuListButton.label}</label>
             </Tooltip>
@@ -121,23 +122,12 @@ export function InputSelect ({
   const Option = (props: OptionProps<Value, true, GroupBase<Value>>) => {
     const id = useId()
     return (
-      <div role="option" aria-labelledby={id} aria-selected>
+      <div role="option" aria-labelledby={id}>
         <components.Option {...props}>
-          <div className="flex items-center gap-2 text-neutral-600">
-            {isMulti ? (
-              <span className="input-select__checkbox">
-              {props.isSelected && <Icon name={IconAwesomeEnum.CHECK} className="text-xs" />}
-            </span>
-            ) : props.data.icon ? (
-              <div className="flex items-center justify-center">{props.data.icon}</div>
-            ) : (
-              <Icon name={IconAwesomeEnum.CHECK} className="opacity-0" />
-            )}
-            <label id={id} className="ml-2 truncate">
-              {props.label}
-            </label>
-          </div>
-
+          <div>{props.data.icon}</div>
+          <label id={id} className="ml-2 truncate">
+            {props.label}
+          </label>
         </components.Option>
       </div>
     )
@@ -151,7 +141,7 @@ export function InputSelect ({
   )
 
   const SingleValue = (props: SingleValueProps<Value>) => (
-    <span className="text-sm text-neutral-400 mr-1 transform -translate-y-3 ml-12">{props.data.label}</span>
+    <span className="text-sm text-neutral-400 mr-1">{props.data.label}</span>
   )
 
   const NoOptionsMessage = (props: NoticeProps<Value>) => {
@@ -159,7 +149,7 @@ export function InputSelect ({
       <components.NoOptionsMessage {...props}>
         <div className="text-center px-3 py-6">
           <Icon name={IconAwesomeEnum.WAVE_PULSE} className="text-neutral-350" />
-          <p className="text-neutral-350 font-medium text-xs mt-1">Aucun résultat à vous fournir</p>
+          <p className="text-neutral-350 font-medium text-xs mt-1">No result for this search</p>
         </div>{' '}
       </components.NoOptionsMessage>
     )
@@ -186,57 +176,36 @@ export function InputSelect ({
   return (
     <div className={className}>
       <div
-        className={classNames(
-          'input--select relative',
-          hasIcon ? 'input--has-icon' : '',
-          inputActions,
-          disabled ? '!border-neutral-250' : '',
-          isFilter ? 'input--filter' : '',
-        )}
+        className={`input input--select ${hasIcon ? 'input--has-icon' : ''} ${inputActions} ${
+          disabled ? '!bg-neutral-100 !border-neutral-250' : ''
+        } ${isFilter ? 'input--filter' : ''}`}
         data-testid={dataTestId || 'select'}
       >
-        { hasIcon && (
+        {hasIcon && (
           <div
             data-testid="selected-icon"
-            className="w-12 absolute left-0 top-8 z-50 flex items-center justify-center"
+            className="w-12 h-full absolute left-0 top-0 flex items-center justify-center"
           >
-            { currentIcon.icon }
+            {currentIcon.icon}
           </div>
         )}
-        { label && (
+        {label && (
           <label
             htmlFor={label}
-            className={classNames(
-              'text-neutral-200',
+            className={
               hasIcon
-              ? `!text-xs !translate-y-0 ${selectedWithIconClassName}`
-              : `${hasLabelUp ? '!text-xs !translate-y-0' : 'text-sm translate-y-2 top-1.5'}`
-            )}
+                ? `!text-xs !translate-y-0 ${selectedWithIconClassName}`
+                : `${hasLabelUp ? '!text-xs !translate-y-0' : 'text-sm translate-y-2 top-1.5'}`
+            }
           >
-            { label }
+            {label}
           </label>
         )}
-
-
-        { currentIcon?.onClickEditable && (
-          <div
-          data-testid="selected-edit-icon"
-          className="cursor-pointer flex items-center justify-center text-sm text-neutral-400 hover:text-brand-500 w-8 h-8 absolute z-10 right-8 top-[10px]"
-          onClick={(event) => {
-            event.stopPropagation()
-            currentIcon.onClickEditable && currentIcon.onClickEditable()
-          }}
-          >
-            <IconFa name={IconAwesomeEnum.PEN} />
-          </div>
-        )}
-
         <Select
           autoFocus={autoFocus}
           options={options}
           isMulti={isMulti}
           data-testid="select-react-select"
-
           components={{
             Option,
             MultiValue,
@@ -246,7 +215,7 @@ export function InputSelect ({
           }}
           name={label}
           inputId={label}
-          menuPlacement="auto"
+          menuPlacement={menuPlacement}
           closeMenuOnSelect={!isMulti}
           onChange={handleChange}
           classNamePrefix="input-select"
@@ -262,18 +231,31 @@ export function InputSelect ({
           styles={{
             menuPortal: (base) => ({
               ...base,
-              zIndex: 50,
               pointerEvents: 'auto',
               // Prevent misplacement with intercom banner
               marginTop: `-${document.body.style.marginTop ? document.body.style.marginTop : 0}`,
             }),
-
           }}
-          menuIsOpen={isFilter ? true : undefined }
+          menuIsOpen={isFilter ? true : undefined}
         />
-
         <input type="hidden" name={label} value={selectedValue} />
-
+        {!isFilter && (
+          <div className="absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none">
+            <Icon name="icon-solid-angle-down" className="text-sm text-neutral-400" />
+          </div>
+        )}
+        {currentIcon?.onClickEditable && (
+          <div
+            data-testid="selected-edit-icon"
+            className="cursor-pointer flex items-center justify-center text-sm text-neutral-400 hover:text-brand-500 w-8 h-8 absolute right-8 top-[10px]"
+            onClick={(event) => {
+              event.stopPropagation()
+              currentIcon.onClickEditable && currentIcon.onClickEditable()
+            }}
+          >
+            <IconFa name={IconAwesomeEnum.PEN} />
+          </div>
+        )}
       </div>
       {error && <p className="px-4 mt-1 font-medium text-xs text-red-500">{error}</p>}
     </div>

@@ -19,7 +19,7 @@ const store = setupStore()
 root.render(
   <div>
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
       <Provider store={store}>
         <BrowserRouter>
           <TooltipProvider>

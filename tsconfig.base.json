@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@polybank/domains/news": ["libs/domains/news/src/index.ts"],
       "@polybank/api-client": ["libs/shared/api-client/src/index.ts"],
       "@polybank/auth": ["libs/shared/auth/src/index.ts"],
       "@polybank/domains/projects": ["libs/domains/projects/src/index.ts"],

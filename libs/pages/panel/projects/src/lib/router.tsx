@@ -5,5 +5,5 @@ export const ROUTER_PANEL_PROJECTS: Route[] = [
   {
     path: '/',
     component: <PageGeneralFeature />
-  }
+  },
 ]

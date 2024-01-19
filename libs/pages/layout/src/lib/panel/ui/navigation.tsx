@@ -5,6 +5,7 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { MenuAccountFeature } from "../feature/menu-account-feature";
 import { useEffect } from "react";
+import {HomeIcon, InboxStackIcon} from '@heroicons/react/20/solid'
 
 export function Navigation () {
   const { pathname } = useLocation()
@@ -24,35 +25,43 @@ export function Navigation () {
         to={"http://localhost:4200"}
         className="flex w-16 h-16 items-center justify-center border-b z-10 dark:border-neutral-500 border-neutral-200"
       >
-        <Icon name={IconEnum.CONSOLE} className="w-9 p-4" />
+        <img src="/logo.png" className="w-9" alt=""/>
       </Link>
 
       <div className="flex flex-col justify-between px-2.5 py-5 flex-grow">
         <div className="flex flex-col gap-3">
-          <Tooltip content="Accueil" side="right">
-            <div>
-            <ButtonIcon 
-              className={classNames(matchHomeRoute ? 'is-active': '')}
-              icon={IconEnum.ENVIRONMENT}
-              style={ButtonIconStyle.ALT}
-              link={'/home'}
-              iconClassName="!w-9"
-            />
-            </div>
-            
+
+          <Tooltip content={"Accueil"} side="right">
+            <Link
+              to="/home"
+              className={classNames(
+                'flex rounded-md p-3 mx-auto dark:hover:text-gray-100 hover:bg-neutral-200 dark:hover:bg-indigo-500 hover:text-brand-500 ease-in-out duration-200 dark:text-gray-400 ',
+                matchHomeRoute ? 'bg-neutral-200 !text-brand-500 dark:bg-indigo-500' : 'text-gray-400'
+              )}
+            >
+              <HomeIcon
+                className={classNames(
+                  'w-5',
+                )}
+              />
+            </Link>
           </Tooltip>
 
-          <Tooltip content="Projets" side="right">
-            <div>
-              <ButtonIcon 
-                className={classNames(matchProjectsRoute ? 'is-active': '')}
-                icon={IconEnum.ENVIRONMENT}
-                style={ButtonIconStyle.ALT}
-                link={'/projects'}
-                iconClassName="!w-9"
+
+          <Tooltip content={"Projets"} side="right">
+            <Link
+              to="/projects"
+              className={classNames(
+                'flex rounded-md p-3 mx-auto dark:hover:text-gray-100 hover:bg-neutral-200 dark:hover:bg-indigo-500 hover:text-brand-500 ease-in-out duration-200 dark:text-gray-400 ',
+                matchProjectsRoute ? 'bg-neutral-200 !text-brand-500 dark:bg-indigo-500' : 'text-gray-400'
+              )}
+            >
+              <InboxStackIcon
+                className={classNames(
+                  'w-5',
+                )}
               />
-            </div>
-           
+            </Link>
           </Tooltip>
         </div>
 
@@ -60,7 +69,7 @@ export function Navigation () {
           <div className="flex flex-col gap-3">
             <Tooltip content="Settings" side="right">
               <div>
-                <ButtonIcon 
+                <ButtonIcon
                   className={matchSettingsRoute ? 'is-active' : ''}
                   icon={IconAwesomeEnum.WHEEL}
                   style={ButtonIconStyle.ALT}

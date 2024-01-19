@@ -1,6 +1,7 @@
 import {Dispatch, SetStateAction, useState} from "react";
 import {classNames} from "@polybank/utils";
 import {Icon} from "@polybank/ui";
+import {IconAwesomeEnum} from "@polybank/enums";
 
 export interface TableHeadSortProps<T> {
   title: string
@@ -42,7 +43,7 @@ export function TableHeadSort<T>({ title, data, currentKey, setData, setIsSorted
     >
       { title }
       <Icon
-        name="icon-solid-arrow-down"
+        name={IconAwesomeEnum.ANGLE_DOWN}
         className={classNames(
           'ml-1 text-2xs inline-block transition-transform ease-out duration-100',
           isSort ? 'rotate-180' : ''

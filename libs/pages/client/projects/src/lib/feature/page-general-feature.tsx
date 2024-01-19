@@ -3,13 +3,14 @@ import { useFetchProjects } from '@polybank/domains/projects'
 import {useEffect} from "react";
 
 export function PageGeneralFeature () {
-  const { data: projects } = useFetchProjects()
+  const { data: projects } = useFetchProjects({ me: true, transactions: true})
 
   useEffect(() => {
     if (projects) {
       console.log(projects)
     }
   }, [projects])
+
   return (
     <div>
       { projects && (

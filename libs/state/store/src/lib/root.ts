@@ -3,13 +3,21 @@ import { PreloadedState, combineReducers, configureStore } from "@reduxjs/toolki
 import { userReducer, initialUserState } from '@polybank/domains/users'
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {initialProjectsState, projects} from '@polybank/domains/projects'
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import {initialNewsState, news} from '@polybank/domains/news'
 
 export const projectReducer = combineReducers({
   projects: projects
 })
+
+export const newsReducer = combineReducers({
+  news: news
+})
+
 export const rootReducer = combineReducers({
   user: userReducer,
-  project: projectReducer
+  project: projectReducer,
+  news: newsReducer
 })
 
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
@@ -31,5 +39,8 @@ export const initialRootState = (): RootState => ({
   user: initialUserState,
   project: {
     projects: initialProjectsState
+  },
+  news: {
+    news: initialNewsState
   }
 })

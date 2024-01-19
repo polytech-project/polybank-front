@@ -1,8 +1,5 @@
-import { CircleStackIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { CircleStackIcon, HomeIcon, UserIcon } from "@heroicons/react/20/solid";
 import { classNames } from "@polybank/utils";
-
-
-
 import { PropsWithChildren } from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -12,6 +9,7 @@ export default function LayoutPage ({ children }: PropsWithChildren) {
 
   const matchHomeRoute = pathname.includes('/home')
   const matchProjectsRoute = pathname.includes(`/projects`)
+  const matchProfilRoute = pathname.includes('/profil')
 
   return (
     <main className="h-screen bg-grey-500 overflow-hidden">
@@ -47,9 +45,17 @@ export default function LayoutPage ({ children }: PropsWithChildren) {
               </div>
             </Link>
 
-
+            <Link to="/profil">
+              <div className="flex flex-col items-center gap-1">
+                <div>
+                  <UserIcon className={classNames('w-6', matchProfilRoute ? 'text-slate-200' : 'text-slate-700')} />
+                </div>
+                <div className={classNames('text-sm',  matchProfilRoute ? 'text-slate-200' : 'text-slate-700')}>
+                  Profile
+                </div>
+              </div>
+            </Link>
           </div>
-
         </div>
       </div>
 

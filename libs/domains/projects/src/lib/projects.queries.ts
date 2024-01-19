@@ -2,11 +2,26 @@ import {useMutation, useQuery, useQueryClient} from "react-query";
 import {apiClient} from "@polybank/api-client";
 import {ProjectEntity, ProjectResponse} from "@polybank/interfaces";
 
-export const useFetchProjects = (me?: boolean) => {
+interface useFetchProjectsProps {
+  me?: boolean,
+  transactions?: boolean,
+  users?: boolean
+}
+export const useFetchProjects = ({ me, transactions, users }: useFetchProjectsProps) => {
   return useQuery(
     ['projects'],
     async (): Promise<ProjectEntity[]> => {
-      const response = await apiClient.get<ProjectResponse>(`/projects?${me ? 'me=true' : ''}`).build()
+      const queriesParams: string[] = []
+      if (me) {
+        queriesParams.push('me=true')
+      }
+      if (transactions) {
+        queriesParams.push('transactions=true')
+      }
+      if (users) {
+        queriesParams.push('users=true')
+      }
+      const response = await apiClient.get<ProjectResponse>(`/projects?${queriesParams.join('&')}`).build()
       return response.data.data
     }, {
       onSuccess: () => {

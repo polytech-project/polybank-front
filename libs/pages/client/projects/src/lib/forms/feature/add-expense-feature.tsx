@@ -22,7 +22,7 @@ export function AddExpenseFeature({ onClose, open, project }: AddExpenseFeatureP
     defaultValues: {
       amount: 0,
       title: "Restaurant",
-      paid_by: ''
+      paid_by: '',
     }
   })
 
@@ -34,6 +34,10 @@ export function AddExpenseFeature({ onClose, open, project }: AddExpenseFeatureP
       paid_by: data.paid_by,
       users: usersIds,
       type: 'expense'
+    }
+
+    if (usersIds.length === 0) {
+      // Créer un toast
     }
 
     createTransaction({
@@ -74,7 +78,14 @@ export function AddExpenseFeature({ onClose, open, project }: AddExpenseFeatureP
       }
     })
     return () => subscribe.unsubscribe()
-  }, [methods])
+  }, [methods, usersIds])
+
+  useEffect(() => {
+    console.log(usersIds)
+    if (usersIds.length === 0) {
+      setDisabled(true)
+    }
+  }, [usersIds])
 
   useEffect(() => {
     calculateAmountPerUser(amount)

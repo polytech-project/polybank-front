@@ -3,7 +3,7 @@ import { PageGeneralFeature } from "./feature/page-general-feature"
 
 export const ROUTER_PANEL_HOME: Route[] = [
   {
-    path: '/',
+    path: '/home',
     component: <PageGeneralFeature />
   }
 ]

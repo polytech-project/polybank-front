@@ -1,5 +1,5 @@
 import {TransactionEntity, ProjectEntity} from '@polybank/interfaces'
-import {PROJECT_OVERVIEW_URL, PROJECT_SETTLEUP_URL, PROJECTS_GENERAL_URL} from '@polybank/routes'
+import {PROJECT_OVERVIEW_URL, PROJECT_REFUND_URL, PROJECT_SETTLEUP_URL, PROJECTS_GENERAL_URL} from '@polybank/routes'
 import {SettingsProjectModalFeature} from '../forms/feature/settings-project-modal-feature'
 import {useState} from 'react'
 import {HeaderProject} from '../components/header_project'
@@ -17,6 +17,7 @@ export interface PageProjectGeneralProps {
 const tabs = [
   { name: 'Dépenses', href: (id: string): string => PROJECT_OVERVIEW_URL(id) + PROJECTS_GENERAL_URL, current: true },
   { name: 'Équilibres', href: (id: string) => PROJECT_OVERVIEW_URL(id) + PROJECT_SETTLEUP_URL, current: false },
+  { name: 'Remboursements', href: (id: string) => PROJECT_OVERVIEW_URL(id) + PROJECT_REFUND_URL, current: false},
 ]
 
 export function PageProjectGeneral ({ project, transactions, expense, balances }: PageProjectGeneralProps) {

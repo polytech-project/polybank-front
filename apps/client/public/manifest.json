@@ -1,0 +1,17 @@
+{
+  "name": "Polybank",
+  "short_name": "Polybank",
+  "description": "La banque des ingénieurs!",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "594x582",
+      "type": "image/png"
+    }
+  ]
+}

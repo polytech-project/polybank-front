@@ -2,6 +2,7 @@ import {TransactionEntity, UserEntity} from '@polybank/interfaces'
 import {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {ArrowLeftIcon} from "@heroicons/react/20/solid";
+import { dateFullFormat } from '@polybank/utils';
 
 export interface PageTransactionGeneralProps {
   transaction: TransactionEntity
@@ -28,7 +29,7 @@ export function PageTransactionGeneral ({ transaction, user }: PageTransactionGe
                 <span> (moi)</span>
               )}
             </div>
-            <div>16/12/2023</div>
+            <div>{ dateFullFormat(transaction.created_at, undefined, 'dd MMMM yyyy') }</div>
           </div>
 
         </div>

@@ -67,7 +67,7 @@ export function AddExpense ({
             name="paid_by"
             control={control}
             rules={{
-              required: 'Please select a cloud provider.',
+              required: 'Please select a user',
             }}
             render={({ field, fieldState: { error } }) => (
               <InputSelect
@@ -93,17 +93,6 @@ export function AddExpense ({
 
 
           <div>
-            <div className="flex justify-end">
-              <div className="flex items-center bg-grey-600 rounded-xl border border-grey-400 w-5/12 p-1  sm:px-0 text-center">
-                <div className="w-full rounded-lg py-1 text-xs font-medium leading-5 bg-white text-grey-800">
-                  Equal
-                </div>
-                <div className="w-full rounded-lg py-1 text-xs font-medium leading-5 text-gray-600">
-                  Manual
-                </div>
-              </div>
-            </div>
-
             <div className="border rounded-md border-grey-400 p-3 flex flex-col mt-3 divide-y divide-grey-400">
               {users.map((user) => (
                 <User
